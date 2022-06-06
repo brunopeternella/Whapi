@@ -6,6 +6,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "clean-node-cache": "npm cache clean -force",
+    "swagger-gen": "node ./swagger.ts",
     "start": "node --loader ts-node/esm ./app.ts"
   },
   "description": "Whapi",

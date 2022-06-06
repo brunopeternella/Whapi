@@ -7,17 +7,26 @@ export class InstanceModel {
     password: string;
     status: string;
     client: venom.Whatsapp;
-    
+    base64QRCode: string;
+
     constructor(username: string, password: string) {
         this.username = username;
         this.password = password;
     }
     
-    public CreateInstance() {
+    public CreateInstance(res: any) {
         venom
             .create(
                 this.username,
-                undefined,
+                (base64Qrimg) => {
+                    this.base64QRCode = base64Qrimg;
+                    if(res != null)
+                        return res.status(201).json({
+                            message: "Instance created successfully",
+                            link: "https://base64.guru/converter/decode/image",
+                            base64QRCode: this.base64QRCode
+                        });
+                },
                 (statusSession, session) => {
                     this.status = statusSession
                 },

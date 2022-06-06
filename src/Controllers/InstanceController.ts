@@ -24,9 +24,14 @@ export class InstanceController implements IApiController{
                 InstanceValidator.prototype.HasUsernameAndPassword(instanceModel);
                 InstanceValidator.prototype.IsUniqueUsername(instanceModel, instances);
 
-                instanceModel.CreateInstance();
-
-                return res.status(204).send();
+                instanceModel.CreateInstance(res);
+                return
+                //return res.status(204).send();
+                return res.status(201).json({
+                    message: "Instance created successfully",
+                    link: "https://base64.guru/converter/decode/image",
+                    base64QRCode: instanceModel.base64QRCode
+                });
             } catch (error) {
                 this.ExceptionResponse(error, res);
             }

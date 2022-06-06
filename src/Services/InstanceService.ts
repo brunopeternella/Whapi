@@ -26,7 +26,7 @@ export class InstanceService{
                     var instanceModel: InstanceModel;
 
                     instanceModel = new InstanceModel('Admin', 'dksaopdksopakdsopadksaop')
-                    instanceModel.CreateInstance()
+                    instanceModel.CreateInstance(null)
 
                     instances.push(instanceModel)
                 } else {
@@ -38,7 +38,7 @@ export class InstanceService{
                         var credential = JSON.parse(fs.readFileSync(`tokens/${instanceName}/${instanceName}.json`).toString())
 
                         instanceModel = new InstanceModel(credential.username, credential.password)
-                        instanceModel.CreateInstance()
+                        instanceModel.CreateInstance(null)
 
                         instances.push(instanceModel)
                     });
