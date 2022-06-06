@@ -24,7 +24,7 @@ export class InstanceController implements IApiController{
                 InstanceValidator.prototype.HasUsernameAndPassword(instanceModel);
                 InstanceValidator.prototype.IsUniqueUsername(instanceModel, instances);
 
-                instanceModel.CreateInstance(res);
+                instanceModel.CreateInstance(res)
                 return
                 //return res.status(204).send();
                 return res.status(201).json({
