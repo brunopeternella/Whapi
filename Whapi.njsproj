@@ -14,7 +14,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>ece95307-8990-4380-ad67-5f48ea7e728b</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>app.ts</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -34,7 +34,10 @@
   <ItemGroup>
     <None Include="app.ts" />
     <Content Include=".env" />
+    <Content Include=".gitignore" />
     <Content Include="package-lock.json" />
+    <None Include="Properties\PublishProfiles\Whappi - Web Deploy.pubxml" />
+    <Content Include="swagger-output.json" />
     <Content Include="tokens\Admin\Admin.json" />
     <Content Include="tokens\Admin\Crashpad\metadata" />
     <Content Include="tokens\Admin\Crashpad\settings.dat" />
@@ -1036,6 +1039,8 @@
     <Content Include="Web.Debug.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="src\" />
     <Folder Include="src\Controllers\" />
     <Folder Include="src\Interfaces\" />
@@ -1146,6 +1151,7 @@
     <TypeScriptCompile Include="src\Models\InstanceModel.ts" />
     <TypeScriptCompile Include="src\Services\InstanceService.ts" />
     <TypeScriptCompile Include="src\Validators\InstanceValidator.ts" />
+    <TypeScriptCompile Include="swagger.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

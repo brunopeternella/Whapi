@@ -30,7 +30,7 @@ export class AuthenticationController implements IApiController{
                         username: req.body.username,
                         password: req.body.password
                     }
-                }, process.env.PRIVATE_KEY, {
+                }, 'Pz15MDENTY3ODkeKWwMTD5MDEyMzQ1ND4tAa', {
                     expiresIn: '24h'
                 })
 

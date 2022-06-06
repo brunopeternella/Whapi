@@ -8,7 +8,7 @@ export class InstanceValidator implements Exception {
     name: string;
     message: string;
 
-    constructor () {}
+    constructor() { }
 
     public ExceptionResponse(error: any, res: any): void {
         new Exception(this.type, error.message, error.status).ExceptionResponse(error, res);
@@ -32,7 +32,7 @@ export class InstanceValidator implements Exception {
                 found = true
         })
 
-        if(!found && !IsValidateToken)
+        if (!found && !IsValidateToken)
             throw new Exception(this.type, 'Invalid credentials!', 400)
 
         return found
@@ -44,19 +44,19 @@ export class InstanceValidator implements Exception {
         if (!req.headers.authorization || req.headers.authorization.indexOf('Bearer ') === -1)
             throw new Exception(this.type, 'Missing Bearer Authorization Header', 401)
 
-        var tokenDecoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.PRIVATE_KEY)
+        var tokenDecoded = jwt.verify(req.headers.authorization.split(' ')[1], 'Pz15MDENTY3ODkeKWwMTD5MDEyMzQ1ND4tAa')
 
-        if(typeof tokenDecoded === 'string'){
+        if (typeof tokenDecoded === 'string') {
             throw new Exception(this.type, 'Invalid token!', 401)
         }
-        else{
+        else {
             instanceModel = new InstanceModel(tokenDecoded.data.username, tokenDecoded.data.password)
         }
 
-        if(!this.IsValidInstance(instanceModel, instances, true))
+        if (!this.IsValidInstance(instanceModel, instances, true))
             throw new Exception(this.type, 'Invalid token!', 401)
-            
-        return instanceModel        
+
+        return instanceModel
     }
 
     public GetInstance(instance: InstanceModel, instances: InstanceModel[]): InstanceModel {
@@ -67,7 +67,7 @@ export class InstanceValidator implements Exception {
                 instanceModel = i
         })
 
-        if(instanceModel == null)
+        if (instanceModel == null)
             throw new Exception(this.type, 'Invalid credentials!', 400)
 
         return instanceModel
