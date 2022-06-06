@@ -1,0 +1,299 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Whappi API Documentation",
+    "description": "API that allows you to send and receive messages from Whatsapp."
+  },
+  "host": "",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Generate a JWT Token that will be used on API requests. First you need to have an Instance created."
+    },
+    {
+      "name": "Message",
+      "description": "Handle messages."
+    },
+    {
+      "name": "Instance",
+      "description": "Handle the client connection to the API."
+    }
+  ],
+  "securityDefinitions": {},
+  "paths": {
+    "/send-text": {
+      "post": {
+        "tags": [
+          "Message"
+        ],
+        "description": "Send a text to destinatary",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The message has been sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendTextResponseModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendTextResponseModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "Define the phone and text to send",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTextModel"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SendTextModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instance": {
+      "post": {
+        "tags": [
+          "Instance"
+        ],
+        "description": "Create a new instance.",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "The instance was created."
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "Client credentials.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialModel"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/token": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Generate token",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Token generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "Credentials to generate the token",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialModel"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CredentialModel"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "CredentialModel": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "username"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "xml": {
+          "name": "CredentialModel"
+        }
+      },
+      "TokenModel": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "example": "jwt token"
+          },
+          "token_type": {
+            "type": "string",
+            "example": "Bearer"
+          }
+        },
+        "xml": {
+          "name": "TokenModel"
+        }
+      },
+      "SendTextModel": {
+        "type": "object",
+        "properties": {
+          "phone": {
+            "type": "string",
+            "example": "5568123456789"
+          },
+          "text": {
+            "type": "string",
+            "example": "sample text"
+          }
+        },
+        "xml": {
+          "name": "SendTextModel"
+        }
+      },
+      "SendTextResponseModel": {
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "example": "message id"
+          },
+          "status": {
+            "type": "string",
+            "example": "status"
+          },
+          "phone": {
+            "type": "string",
+            "example": "5568123456789"
+          },
+          "text": {
+            "type": "string",
+            "example": "sample text"
+          }
+        },
+        "xml": {
+          "name": "SendTextResponseModel"
+        }
+      },
+      "BadRequest": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "object"
+              },
+              "details": {
+                "type": "string",
+                "example": "error detail"
+              },
+              "status": {
+                "type": "number",
+                "example": 400
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "BadRequest"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
