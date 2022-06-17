@@ -1,18 +1,16 @@
-on:
-  push:
-  pull_request:
+on: [push]
 
 jobs:
-  tsc:
-    name: tsc
+  build-push:
     runs-on: ubuntu-latest
+    name: Builds Typescript
     steps:
-    - uses: actions/checkout@v1
-    - name: install node v12
-      uses: actions/setup-node@v1
-      with:
-        node-version: 16
-    - name: npm install
-      run: npm install
-    - name: tsc
-      uses: npm run build
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Building Typescript
+        uses: FuLagann/tsc-build-push@v1
+        with:
+          user-name: "bruno-pt"
+          user-email: "brunopeternella@outlook.com"
+          message: "Automatically built unbuilt typescript"
+          directories: ./, ./src
