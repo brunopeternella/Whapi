@@ -4,7 +4,7 @@ const swaggerAutogen = require('swagger-autogen')({
 
 const doc = {
     info: {
-        version: '1.0.0', // by default: '1.0.0'
+        version: '1.0.1', // by default: '1.0.0'
         title: 'Whappi API Documentation', // by default: 'REST API'
         description: 'API that allows you to send and receive messages from Whatsapp.', // by default: ''
     },
