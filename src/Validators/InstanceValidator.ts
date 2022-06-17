@@ -1,6 +1,7 @@
 import { InstanceModel } from "../Models/InstanceModel";
 import { Exception } from "../Exception";
 import * as jwt from 'jsonwebtoken';
+require('dotenv').config('../../.env');
 
 export class InstanceValidator implements Exception {
     type: string = this.constructor.name;;
@@ -44,7 +45,7 @@ export class InstanceValidator implements Exception {
         if (!req.headers.authorization || req.headers.authorization.indexOf('Bearer ') === -1)
             throw new Exception(this.type, 'Missing Bearer Authorization Header', 401)
 
-        var tokenDecoded = jwt.verify(req.headers.authorization.split(' ')[1], 'Pz15MDENTY3ODkeKWwMTD5MDEyMzQ1ND4tAa')
+        var tokenDecoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.PRIVATE_KEY)
 
         if (typeof tokenDecoded === 'string') {
             throw new Exception(this.type, 'Invalid token!', 401)

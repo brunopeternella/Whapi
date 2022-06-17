@@ -6,13 +6,13 @@ import { InstanceValidator } from "../Validators/InstanceValidator";
 import * as jwt from 'jsonwebtoken';
 require('dotenv').config('../../.env');
 
-export class AuthenticationController implements IApiController{
+export class AuthenticationController implements IApiController {
     type: string = this.constructor.name;
     status: number;
     name: string;
     message: string;
     stack?: string;
-    
+
     public ExceptionResponse(error: any, res: any): void {
         new Exception(this.type, error.message, error.status).ExceptionResponse(error, res);
     }
@@ -22,15 +22,15 @@ export class AuthenticationController implements IApiController{
         app.post('/token', (req, res) => {
             try {
                 var instanceModel = new InstanceModel(req.body.username, req.body.password);
-                
+
                 InstanceValidator.prototype.IsValidInstance(instanceModel, instances, false);
-                
+
                 var token = jwt.sign({
                     data: {
                         username: req.body.username,
                         password: req.body.password
                     }
-                }, 'Pz15MDENTY3ODkeKWwMTD5MDEyMzQ1ND4tAa', {
+                }, process.env.PRIVATE_KEY, {
                     expiresIn: '24h'
                 })
 

@@ -25,7 +25,7 @@ export class InstanceController implements IApiController{
                 InstanceValidator.prototype.IsUniqueUsername(instanceModel, instances);
 
                 instanceModel.CreateInstance(res)
-                return
+                //return
                 //return res.status(204).send();
                 return res.status(201).json({
                     message: "Instance created successfully",
