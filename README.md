@@ -1,6 +1,8 @@
 
-# Whapi
-
+# About
+![Logo](https://user-images.githubusercontent.com/60880102/174495365-6e490dcb-7f4d-4d41-a116-38604f59fe04.png)
+<br/>
+<br/>
 Whapi is basically an API build on top of venom, a library for WhatsApp that contains methods to communicate with. The purpose of Whapi is use that methods through that API.
 
 
@@ -51,7 +53,7 @@ Start the server
 
 #### Create a new instance
 
-```http
+```bash
   POST /api/instance
 ```
 
@@ -64,7 +66,7 @@ Start the server
 #### Generate bearer token
 *You need to have an instace created before.*
 
-```http
+```bash
   POST /api/token
 ```
 | Body | Type     | Description                       |
@@ -75,7 +77,7 @@ Start the server
 
 #### Send a text to destinatary
 
-```http
+```bash
   POST /api/send-text
 ```
 | Parameter | Type     | Description                       |
